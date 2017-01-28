@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/google_plus_login"
+            android:title="@string/google_plus_login"
+            android:icon="@drawable/ic_login"></item>
+        <item
+            android:id="@+id/nav_home"
+            android:icon="@drawable/ic_home"
+            android:title="@string/nav_home" />
+        <item
+            android:id="@+id/nav_starred"
+            android:icon="@drawable/ic_filled_star"
+            android:title="@string/nav_starred" />
+        <item
+            android:id="@+id/nav_remainders"
+            android:icon="@drawable/ic_alarm"
+            android:title="@string/nav_remainders" />
+        <item
+            android:id="@+id/nav_todo"
+            android:icon="@drawable/ic_schedule"
+            android:title="@string/nav_todo" />
+        <item
+            android:id="@+id/nav_checklists"
+            android:icon="@drawable/ic_checkbox"
+            android:title="@string/nav_checklists"
+            />
+        <item
+            android:id="@+id/google_plus_logout"
+            android:title="@string/google_plus_logout"
+            android:icon="@drawable/ic_logout"></item>
+
+    </group>
+
+    <item android:title="Others">
+        <menu>
+            <item
+                android:id="@+id/nav_about_us"
+                android:icon="@drawable/ic_forum"
+                android:title="@string/nav_about_us" />
+            <item
+                android:id="@+id/nav_settings"
+                android:icon="@drawable/ic_settings"
+                android:title="@string/nav_settings" />
+        </menu>
+    </item>
+</menu>

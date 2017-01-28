@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/Save"
+        android:orderInCategory="100"
+        android:title="@string/save_note"
+        app:showAsAction="always"/>
+    <item
+        android:id="@+id/Delete"
+        android:orderInCategory="200"
+        android:title="@string/delete_note"/>
+    <item
+        android:id="@+id/Starred"
+        android:orderInCategory="300"
+        android:title="@string/mark_as_starred"/>
+    <item
+        android:id="@+id/Unstarred"
+        android:orderInCategory="400"
+        android:title="@string/mark_as_unstarred"
+        />
+
+</menu>

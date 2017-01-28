@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "307919285456",
+    "project_id": "my-note-946950"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:307919285456:android:15d8941755576d48",
+        "android_client_info": {
+          "package_name": "com.programmingbear.mynote"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "307919285456-fp7mv875u09tmglkfp7obaktm88r4u5l.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.programmingbear.mynote",
+            "certificate_hash": "540E94AB9476179561A7C4F8B8A0535433F7764C"
+          }
+        },
+        {
+          "client_id": "307919285456-4t1hm5crcu5nftre4rejf2v3dh0qs5kn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDhYQ-VaBr1xGmygI8Upd-YB2OXoBvIEP0"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
