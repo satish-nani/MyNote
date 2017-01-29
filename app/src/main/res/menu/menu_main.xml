@@ -7,4 +7,9 @@
         android:orderInCategory="100"
         android:title="Add new"
         app:showAsAction="never"/>
+    <item
+        android:id="@+id/deleteAll"
+        android:orderInCategory="200"
+        android:title="Delete all"
+        app:showAsAction="never"/>
 </menu>

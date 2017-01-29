@@ -23,6 +23,7 @@ public class NDb extends SQLiteOpenHelper {
     public static final String dates="dates";
     public static final String mynotes="mynotes";
     public static final String signInDetails="signInDetails";
+    public static final String isStarred="isStarred";
 
     SQLiteDatabase db;
 
@@ -101,7 +102,7 @@ public class NDb extends SQLiteOpenHelper {
 
     //Used to getData for the given id
     public Cursor getData(int id){
-        SQLiteDatabase db=this.getReadableDatabase();
+        db=this.getReadableDatabase();
         Cursor z=db.rawQuery("select * from " + mynotes + " where _id=" + id
                 + "", null);
         return z;
@@ -115,12 +116,22 @@ public class NDb extends SQLiteOpenHelper {
     }
 
     //Used to update the record mentioned by the given id
-    public boolean updateNotes(int id,String name,String dates,String remark){
+    public boolean updateNotes(int id,String name,String dates,String remark,int isStarred){
         SQLiteDatabase db=this.getWritableDatabase();
         ContentValues contentValues=new ContentValues();
         contentValues.put("name", name);
         contentValues.put("dates",dates);
         contentValues.put("remark",remark);
+        contentValues.put("isStarred",isStarred);
+        db.update(mynotes,contentValues,"_id=?",new String[]{Integer.toString(id)});
+        return true;
+    }
+
+    public boolean updateStar(int id,int isStarred){
+
+        SQLiteDatabase db=this.getWritableDatabase();
+        ContentValues contentValues=new ContentValues();
+        contentValues.put("isStarred",isStarred);
         db.update(mynotes,contentValues,"_id=?",new String[]{Integer.toString(id)});
         return true;
     }
@@ -131,6 +142,16 @@ public class NDb extends SQLiteOpenHelper {
         return db.delete(mynotes,"_id=?",new String[]{Integer.toString(id)});
     }
 
+    public Integer deleteAllNotes(){
+        SQLiteDatabase db=this.getWritableDatabase();
+        return db.delete(mynotes,null,null);
+    }
+
+    public Cursor getImpBool(int position){
+        SQLiteDatabase dba=this.getReadableDatabase();
+        Cursor isImpOrNot=dba.rawQuery("select * from " + mynotes + " where _id=" + position + "", null);
+        return isImpOrNot;
+    }
 
     //Used to delete signInDetails in the table
     public Integer deleteSignInDetails(){
@@ -152,5 +173,17 @@ public class NDb extends SQLiteOpenHelper {
             res.moveToNext();
         }
         return arrayList;
+    }
+
+    public int sendImpBool(int position){
+        int result=0;
+        db=this.getReadableDatabase();
+        Cursor imp=db.rawQuery("select * from " + mynotes + " where _id=" + position
+                + "", null);
+            if(imp.moveToFirst()){
+            while ( !imp.isAfterLast() ) {
+                result = imp.getInt(imp.getColumnIndex(NDb.isStarred));
+            }}
+        return result;
     }
 }

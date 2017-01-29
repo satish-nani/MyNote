@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.os.Handler;
 import android.provider.Settings;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
@@ -32,8 +33,10 @@ public class DisplayNote extends AppCompatActivity{
     int id_To_Update=0;
     String dateString;
     ActionBar actionBar;
-    int isStarred=0;
+    int isStarred;
     Menu menu;
+    Bundle extras;
+    boolean clickedSaveButton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,10 +47,10 @@ public class DisplayNote extends AppCompatActivity{
         actionBar=getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
         mydb=new NDb(this);
-        Bundle extras;
         extras=getIntent().getExtras();
+        String type=extras.getString("Type");
         int Value=extras.getInt("id");
-        if(Value>0){
+            if(Value>0){
             snackbar=Snackbar.make(coordinatorLayout, "Note Id : "+String.valueOf(Value), Snackbar.LENGTH_SHORT);
             snackbar.show();
             Cursor rs=mydb.getData(Value);
@@ -55,14 +58,16 @@ public class DisplayNote extends AppCompatActivity{
             rs.moveToFirst();
             String nam=rs.getString(rs.getColumnIndex(NDb.name));
             String contents=rs.getString(rs.getColumnIndex(NDb.remark));
+            isStarred=rs.getInt(rs.getColumnIndex(NDb.isStarred));
             if(!rs.isClosed()){
                 rs.close();
             }
             name.setText(nam);
             content.setText(contents);
         }
-
     }
+
+
 
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
@@ -89,6 +94,7 @@ public class DisplayNote extends AppCompatActivity{
         //}
         return true;
     }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -126,21 +132,28 @@ public class DisplayNote extends AppCompatActivity{
                 String formattedDate = df.format(c.getTime());
                 dateString = formattedDate;
                 if (extras != null) {
-                    int Value = extras.getInt("id");
-                    if (Value > 0) {
+                    String type = extras.getString("Type");
+                    if (!(type.equals("new"))) {
                         if (content.getText().toString().trim().equals("") || name.getText().toString().trim().equals("")) {
                             snackbar = Snackbar.make(coordinatorLayout, "Please enter the note details", Snackbar.LENGTH_SHORT);
                             snackbar.show();
                         } else {
-                            if (mydb.updateNotes(id_To_Update, name.getText().toString(), dateString, content.getText().toString())) {
+                            if (mydb.updateNotes(id_To_Update, name.getText().toString(), dateString, content.getText().toString(),isStarred)) {
                                 snackbar = Snackbar.make(coordinatorLayout, "We are upto date with you :)", Snackbar.LENGTH_SHORT);
                                 snackbar.show();
+                                new Handler().postDelayed(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        finish();
+                                    }
+                                }, 1000);
+
                             } else {
                                 snackbar = Snackbar.make(coordinatorLayout, "Something happened, sorry :(", Snackbar.LENGTH_SHORT);
                                 snackbar.show();
                             }
                         }
-                    } else {
+                    } else if(type.equals("new")){
                         if (content.getText().toString().trim().equals("") || name.getText().toString().trim().equals("")) {
                             snackbar = Snackbar.make(coordinatorLayout, "Please enter the note details", Snackbar.LENGTH_SHORT);
                             snackbar.show();
@@ -148,6 +161,14 @@ public class DisplayNote extends AppCompatActivity{
                             if (mydb.insertNotes(name.getText().toString(), dateString, content.getText().toString(),isStarred)) {
                                 snackbar = Snackbar.make(coordinatorLayout, "Your note is with us. Don't worry!", Snackbar.LENGTH_SHORT);
                                 snackbar.show();
+                                new Handler().postDelayed(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        Intent intent=new Intent();
+                                        setResult(RESULT_OK,intent);
+                                        finish();
+                                    }
+                                }, 1000);
                             } else {
                                 snackbar = Snackbar.make(coordinatorLayout, "Something happened, sorry :(", Snackbar.LENGTH_SHORT);
                                 snackbar.show();
@@ -161,9 +182,11 @@ public class DisplayNote extends AppCompatActivity{
 
                 item.setVisible(false);
                 isStarred=1;
+                snackbar=Snackbar.make(coordinatorLayout,"Save the note to reflect the changes",Snackbar.LENGTH_SHORT);
+                snackbar.show();
                 return true;
             case R.id.Unstarred:
-                isStarred=1;
+                isStarred=0;
                 item.setVisible(false);
                 return true;
             default:
@@ -177,5 +200,15 @@ public class DisplayNote extends AppCompatActivity{
         Intent intent=new Intent(getApplicationContext(),MyNotes.class);
         startActivity(intent);
         finish();
+    }
+
+    public void starClick(int position){
+
+        int isImpOrNot;
+        Cursor imp=mydb.getImpBool(position+1);
+        imp.moveToFirst();
+        while(!imp.isAfterLast()){
+            isImpOrNot=imp.getInt(imp.getColumnIndex("isStarred"));
+        }
     }
 }
