@@ -83,6 +83,8 @@
             android:cursorVisible="true"
             android:background="@null">
         </EditText>
+
     </LinearLayout>
+
     </LinearLayout>
 </android.support.design.widget.CoordinatorLayout>

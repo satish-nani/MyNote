@@ -7,8 +7,7 @@ import android.view.View;
  */
 public interface ClickListener {
 
-    public void itemClicked(View v,int position);
-
-
+    public void itemClicked(String text,String remarks);
+   // public void imageClicked(String text,String remarks);
 
 }

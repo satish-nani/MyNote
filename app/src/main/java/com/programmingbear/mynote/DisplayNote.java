@@ -1,7 +1,9 @@
 package com.programmingbear.mynote;
 
 import android.app.AlertDialog;
+import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.app.TimePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
@@ -12,9 +14,14 @@ import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
@@ -37,6 +44,8 @@ public class DisplayNote extends AppCompatActivity{
     Menu menu;
     Bundle extras;
     boolean clickedSaveButton;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,8 +59,8 @@ public class DisplayNote extends AppCompatActivity{
         extras=getIntent().getExtras();
         String type=extras.getString("Type");
         int Value=extras.getInt("id");
-            if(Value>0){
-            snackbar=Snackbar.make(coordinatorLayout, "Note Id : "+String.valueOf(Value), Snackbar.LENGTH_SHORT);
+           /* if(Value>0){
+            snackbar=Snackbar.make(coordinatorLayout,"Note priority things first :P", Snackbar.LENGTH_SHORT);
             snackbar.show();
             Cursor rs=mydb.getData(Value);
             id_To_Update=Value;
@@ -64,7 +73,14 @@ public class DisplayNote extends AppCompatActivity{
             }
             name.setText(nam);
             content.setText(contents);
-        }
+        }else */if(Value==10){
+            Cursor rs=mydb.getId(extras.getString("text"));
+            rs.moveToFirst();
+            id_To_Update=rs.getInt(rs.getColumnIndex(NDb._id));
+            isStarred=rs.getInt(rs.getColumnIndex(NDb.isStarred));
+                name.setText(extras.getString("text"));
+                content.setText(extras.getString("remark"));
+            }
     }
 
 
@@ -189,6 +205,27 @@ public class DisplayNote extends AppCompatActivity{
                 isStarred=0;
                 item.setVisible(false);
                 return true;
+            case R.id.PickTime:
+                int currentHour,currentMinute;
+
+                Calendar ca = Calendar.getInstance();
+                currentHour = ca.get(Calendar.HOUR_OF_DAY);
+                currentMinute = ca.get(Calendar.MINUTE);
+
+                // Launch Time Picker Dialog
+                TimePickerDialog tpd = new TimePickerDialog(this,
+                        new TimePickerDialog.OnTimeSetListener() {
+                            int futureHour,futureMinute;
+                            @Override
+                            public void onTimeSet(TimePicker view, int hourOfDay,
+                                                  int minute) {
+                                sendPickedTime(hourOfDay,minute);
+                                Toast.makeText(getApplicationContext(),hourOfDay + ":" + minute,Toast.LENGTH_SHORT).show();
+                            }
+                        }, currentHour, currentMinute, true);
+
+                tpd.show();
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -202,7 +239,7 @@ public class DisplayNote extends AppCompatActivity{
         finish();
     }
 
-    public void starClick(int position){
+   /* public void starClick(int position){
 
         int isImpOrNot;
         Cursor imp=mydb.getImpBool(position+1);
@@ -210,5 +247,27 @@ public class DisplayNote extends AppCompatActivity{
         while(!imp.isAfterLast()){
             isImpOrNot=imp.getInt(imp.getColumnIndex("isStarred"));
         }
+    }*/
+
+    public void sendPickedTime(final int mHour, final int mMinute){
+
+        int mYear,mMonth,mDay;
+        final Calendar c = Calendar.getInstance();
+        mYear = c.get(Calendar.YEAR);
+        mMonth = c.get(Calendar.MONTH);
+        mDay = c.get(Calendar.DAY_OF_MONTH);
+
+
+        DatePickerDialog datePickerDialog = new DatePickerDialog(this,
+                new DatePickerDialog.OnDateSetListener() {
+
+                    @Override
+                    public void onDateSet(DatePicker view, int year,
+                                          int monthOfYear, int dayOfMonth) {
+                        Toast.makeText(getApplicationContext(),dayOfMonth + "-" + (monthOfYear+1) + "-" + year,Toast.LENGTH_SHORT).show();
+
+                    }
+                }, mYear, mMonth, mDay);
+        datePickerDialog.show();
     }
 }

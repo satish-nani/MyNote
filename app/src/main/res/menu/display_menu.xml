@@ -19,5 +19,9 @@
         android:orderInCategory="400"
         android:title="@string/mark_as_unstarred"
         />
+    <item
+        android:id="@+id/PickTime"
+        android:orderInCategory="500"
+        android:title="Set Reminder"/>
 
 </menu>

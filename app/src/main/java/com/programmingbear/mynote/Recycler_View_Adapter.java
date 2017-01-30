@@ -24,17 +24,20 @@ import java.util.List;
  */
 public class Recycler_View_Adapter extends RecyclerView.Adapter<Recycler_View_Adapter.View_Holder> {
 
-    NDb ndbObj;
     List<note> list=Collections.emptyList();
     Context context;
+    Context con;
     ClickListener clickListener=null;
     MyNotes mynotes=new MyNotes();
-
+    NDb nd;
 
 
     public Recycler_View_Adapter(List<note> list, Context context) {
         this.list = list;
         this.context = context;
+        nd=new NDb(context);
+        con=context;
+
     }
 
     public class View_Holder extends RecyclerView.ViewHolder implements View.OnClickListener{
@@ -53,29 +56,7 @@ public class Recycler_View_Adapter extends RecyclerView.Adapter<Recycler_View_Ad
             txtnamerow=(TextView)itemView.findViewById(R.id.txtnamerow);
             isStarred=(ImageView)itemView.findViewById(R.id.is_starred);
 
-            isStarred.setOnClickListener(new View.OnClickListener() {
-                int isImpOrNot;
-
-                @Override
-                public void onClick(View view) {
-                   int position = (int) view.getTag();
-                    Log.d("Tagfueuigfeiuef",Integer.toString(position));
-                    ndbObj=new NDb(view.getContext());
-                    isImpOrNot=ndbObj.sendImpBool(position);
-                   /* if ( isImpOrNot == 1 ) {
-                        isStarred.setImageResource(R.drawable.ic_empty_star);
-                        ndbObj.updateStar(position + 1, 0);
-                    } else {
-                        isStarred.setImageResource(R.drawable.ic_filled_star);
-                        ndbObj.updateStar(position + 1, 1);
-                    }*/
-
-                }
-            });
-
-
             itemView.setOnClickListener(this);
-
 
         }
 
@@ -83,7 +64,7 @@ public class Recycler_View_Adapter extends RecyclerView.Adapter<Recycler_View_Ad
         public void onClick(View view) {
 
             if(clickListener!=null){
-                clickListener.itemClicked(view,getAdapterPosition());
+                clickListener.itemClicked(txtnamerow.getText().toString(),txtremark.getText().toString());
             }
         }
     }
@@ -100,12 +81,28 @@ public class Recycler_View_Adapter extends RecyclerView.Adapter<Recycler_View_Ad
     }
 
     @Override
-    public void onBindViewHolder(View_Holder holder,int position) {
+    public void onBindViewHolder( final View_Holder holder,final int position) {
 
         final int isStarred=list.get(position).getisStarred();
         holder.txtnamerow.setText(list.get(position).getName());
       //  holder.txtdate.setText(list.get(position).getDates());
         holder.txtremark.setText(list.get(position).getRemark());
+        holder.isStarred.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int starred=list.get(position).getisStarred();
+
+                if(starred==1) {
+                    holder.isStarred.setImageResource(R.drawable.ic_empty_star);
+                    nd.setImpBool(list.get(position).getName(),0);
+                }else{
+                    holder.isStarred.setImageResource(R.drawable.ic_filled_star);
+                    nd.setImpBool(list.get(position).getName(),1);
+                    starred=1;
+                }
+
+            }
+        });
         holder.isStarred.setTag(position);
         if(isStarred==1) {
             holder.isStarred.setImageResource(R.drawable.ic_filled_star);

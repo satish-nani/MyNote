@@ -59,6 +59,7 @@ public class MyNotes extends AppCompatActivity implements NavigationView.OnNavig
     Menu drawerMenu;
     MenuItem logoutItem,loginItem;
     static int NEW_NOTE_REQUEST=100;
+    Recycler_View_Adapter adapter;
 
 
 
@@ -157,7 +158,7 @@ public class MyNotes extends AppCompatActivity implements NavigationView.OnNavig
                 c.moveToNext();
             }
         }
-        Recycler_View_Adapter adapter=new Recycler_View_Adapter(noteList,getApplication());
+       adapter=new Recycler_View_Adapter(noteList,getApplication());
         recycler_view.setAdapter(adapter);
         recycler_view.setLayoutManager(new LinearLayoutManager(this));
         recycler_view.setHasFixedSize(true);
@@ -322,6 +323,16 @@ public class MyNotes extends AppCompatActivity implements NavigationView.OnNavig
               logoutItem.setVisible(false);
               hideDrawer();
               return true;
+          case R.id.nav_starred:
+              List<note> starredNotes=new ArrayList<note>();
+              starredNotes=mydb.getStarredNotes();
+              adapter=new Recycler_View_Adapter(starredNotes,getApplication());
+              recycler_view.setAdapter(adapter);
+              recycler_view.setLayoutManager(new LinearLayoutManager(this));
+              recycler_view.setHasFixedSize(true);
+              adapter.setClickListener(this);
+              hideDrawer();
+              return true;
       }
 
         hideDrawer();
@@ -348,34 +359,33 @@ public class MyNotes extends AppCompatActivity implements NavigationView.OnNavig
     }
 
     @Override
-    public void itemClicked(View v, int position) {
+    public void itemClicked(String text,String remark) {
 
         Intent viewIntent=new Intent(this,DisplayNote.class);
-        viewIntent.putExtra("id", position+1);
+       // viewIntent.putExtra("id", position+1);
+        viewIntent.putExtra("text",text);
+        // 10 is just a value given to identify this intent
+        viewIntent.putExtra("id",10);
+        viewIntent.putExtra("remark",remark);
         viewIntent.putExtra("Type", "old");
         startActivity(viewIntent);
     }
 
-   /* @Override
-    public void imageClicked(View v, int position) {
+   /*@Override
+    public void imageClicked(String text,String remark) {
         int isImpOrNot=0;
-        ImageView img=  (ImageView)v.findViewById(R.id.is_starred);
-
-        Cursor imp = mydb.getImpBool(position+1);
-        imp.moveToFirst();
-        while ( !imp.isAfterLast() ) {
-            isImpOrNot = imp.getInt(imp.getColumnIndex(NDb.isStarred));
-        }
+        isImpOrNot = mydb.getImpBool(text);
         if ( isImpOrNot == 1 ) {
-            img.setImageResource(R.drawable.ic_empty_star);
-            mydb.updateStar(position + 1, 0);
+           // Toast.makeText(getApplicationContext(),isImpOrNot,Toast.LENGTH_SHORT).show();
+            //img.setImageResource(R.drawable.ic_empty_star);
+            //mydb.updateStar(position + 1, 0);
         } else {
-            img.setImageResource(R.drawable.ic_filled_star);
-            mydb.updateStar(position + 1, 1);
-        }}*/
-        /*public int sendImpBool(int position){
+            //img.setImageResource(R.drawable.ic_filled_star);
+            //mydb.updateStar(position + 1, 1);
+        }}
+        public int sendImpBool(int position){
             int result=0;
-            mydb.getData(1);
+         Cursor imp=mydb.sendImpBool(position + 1);
             if(imp.moveToFirst()){
             while ( !imp.isAfterLast() ) {
                 result = imp.getInt(imp.getColumnIndex(NDb.isStarred));

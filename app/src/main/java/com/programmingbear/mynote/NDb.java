@@ -147,10 +147,16 @@ public class NDb extends SQLiteOpenHelper {
         return db.delete(mynotes,null,null);
     }
 
-    public Cursor getImpBool(int position){
-        SQLiteDatabase dba=this.getReadableDatabase();
-        Cursor isImpOrNot=dba.rawQuery("select * from " + mynotes + " where _id=" + position + "", null);
-        return isImpOrNot;
+    public int getImpBool(String text){
+        db=this.getReadableDatabase();
+        int result=0;
+        Cursor isImpOrNot=db.rawQuery("select * from " + mynotes + " where " +name +"=?", new String [] {text});
+        if(isImpOrNot.moveToFirst()){
+            while ( !isImpOrNot.isAfterLast() ){
+                result=isImpOrNot.getInt(isImpOrNot.getColumnIndex(NDb.isStarred));
+            }
+        }
+        return result;
     }
 
     //Used to delete signInDetails in the table
@@ -175,15 +181,38 @@ public class NDb extends SQLiteOpenHelper {
         return arrayList;
     }
 
-    public int sendImpBool(int position){
+    public boolean setImpBool(String text,int position){
         int result=0;
-        db=this.getReadableDatabase();
-        Cursor imp=db.rawQuery("select * from " + mynotes + " where _id=" + position
-                + "", null);
-            if(imp.moveToFirst()){
-            while ( !imp.isAfterLast() ) {
-                result = imp.getInt(imp.getColumnIndex(NDb.isStarred));
-            }}
-        return result;
+        db=this.getWritableDatabase();
+        ContentValues contentValues=new ContentValues();
+        contentValues.put("isStarred",position);
+        db.update(mynotes,contentValues,name+"=?",new String[]{text});
+        return true;
     }
+
+    public ArrayList<note> getStarredNotes(){
+        ArrayList<note> starredNotes =new ArrayList<note>();
+        SQLiteDatabase db=this.getReadableDatabase();
+        Cursor res=db.rawQuery("select * from " + mynotes+" where "+NDb.isStarred+" =1", null);
+        res.moveToFirst();
+        while(res.isAfterLast()==false){
+            note noteObj=new note();
+            //starredNotes.add(res.getString(res.getColumnIndex("_id")));
+            noteObj.setRemark(res.getString(res.getColumnIndex(remark)));
+            noteObj.setDates(res.getString(res.getColumnIndex(dates)));
+            noteObj.setName(res.getString(res.getColumnIndex(name)));
+            noteObj.setIsStarred(res.getInt(res.getColumnIndex(isStarred)));
+            starredNotes.add(noteObj);
+            res.moveToNext();
+        }
+
+        return starredNotes;
+    }
+
+    public Cursor getId(String text){
+        SQLiteDatabase dba=this.getReadableDatabase();
+        Cursor isImpOrNot=dba.rawQuery("select * from " + mynotes + " where " +name +"=?", new String [] {text});
+        return isImpOrNot;
+    }
+
 }
