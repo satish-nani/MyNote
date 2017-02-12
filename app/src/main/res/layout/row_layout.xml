@@ -91,6 +91,8 @@
                     android:text="S.V.SATISH KUMAR"
                     android:textSize="15sp"
                     android:textColor="#000000"
+                    android:maxLines="1"
+                    android:ellipsize="end"
                     />
             </LinearLayout>
 

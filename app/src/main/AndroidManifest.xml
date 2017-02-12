@@ -36,6 +36,8 @@
             android:label="@string/title_activity_google"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"></activity>
+        <service android:name="ScheduleService" />
+        <service android:name="NotifyService" />
     </application>
 
 </manifest>

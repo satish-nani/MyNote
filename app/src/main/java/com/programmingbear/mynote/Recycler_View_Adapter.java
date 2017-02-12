@@ -26,7 +26,6 @@ public class Recycler_View_Adapter extends RecyclerView.Adapter<Recycler_View_Ad
 
     List<note> list=Collections.emptyList();
     Context context;
-    Context con;
     ClickListener clickListener=null;
     MyNotes mynotes=new MyNotes();
     NDb nd;
@@ -36,7 +35,6 @@ public class Recycler_View_Adapter extends RecyclerView.Adapter<Recycler_View_Ad
         this.list = list;
         this.context = context;
         nd=new NDb(context);
-        con=context;
 
     }
 
@@ -55,6 +53,21 @@ public class Recycler_View_Adapter extends RecyclerView.Adapter<Recycler_View_Ad
             //txtdate=(TextView)itemView.findViewById(R.id.txtdate);
             txtnamerow=(TextView)itemView.findViewById(R.id.txtnamerow);
             isStarred=(ImageView)itemView.findViewById(R.id.is_starred);
+
+            isStarred.setOnClickListener(new View.OnClickListener(){
+                @Override
+                public void onClick(View view) {
+
+                    if(isStarred.getTag().equals("R.drawable.ic_empty_star")){
+                    isStarred.setImageResource(R.drawable.ic_filled_star);
+                    }else{
+                    isStarred.setImageResource(R.drawable.ic_empty_star);
+                    }
+                    if(clickListener!=null){
+                        clickListener.imageClicked(txtnamerow.getText().toString(),isStarred.getTag().toString());
+                    }
+                }
+            });
 
             itemView.setOnClickListener(this);
 
@@ -87,7 +100,7 @@ public class Recycler_View_Adapter extends RecyclerView.Adapter<Recycler_View_Ad
         holder.txtnamerow.setText(list.get(position).getName());
       //  holder.txtdate.setText(list.get(position).getDates());
         holder.txtremark.setText(list.get(position).getRemark());
-        holder.isStarred.setOnClickListener(new View.OnClickListener() {
+        /*holder.isStarred.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 int starred=list.get(position).getisStarred();
@@ -98,16 +111,17 @@ public class Recycler_View_Adapter extends RecyclerView.Adapter<Recycler_View_Ad
                 }else{
                     holder.isStarred.setImageResource(R.drawable.ic_filled_star);
                     nd.setImpBool(list.get(position).getName(),1);
-                    starred=1;
                 }
 
             }
-        });
-        holder.isStarred.setTag(position);
+        });*/
+
         if(isStarred==1) {
             holder.isStarred.setImageResource(R.drawable.ic_filled_star);
+            holder.isStarred.setTag("R.drawable.ic_filled_star");
         }else{
             holder.isStarred.setImageResource(R.drawable.ic_empty_star);
+            holder.isStarred.setTag("R.drawable.ic_empty_star");
         }
     }
 

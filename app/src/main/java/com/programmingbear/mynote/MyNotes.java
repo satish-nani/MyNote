@@ -3,14 +3,11 @@ package com.programmingbear.mynote;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-import android.media.Image;
 import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
-import android.support.v4.app.TaskStackBuilder;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -21,20 +18,11 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.google.android.gms.auth.api.Auth;
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.api.GoogleApiClient;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -49,8 +37,6 @@ public class MyNotes extends AppCompatActivity implements NavigationView.OnNavig
     NDb mydb;
     Menu menu;
     Context context=this;
-   // SimpleCursorAdapter adapter;
-    Snackbar snackbar;
     RecyclerView recycler_view;
     DrawerLayout mDrawerLayout;
     Toolbar mToolbar;
@@ -60,15 +46,13 @@ public class MyNotes extends AppCompatActivity implements NavigationView.OnNavig
     MenuItem logoutItem,loginItem;
     static int NEW_NOTE_REQUEST=100;
     Recycler_View_Adapter adapter;
-
-
+    List<note> noteList=new ArrayList<note>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.drawer_activity);
-
         recycler_view=(RecyclerView)findViewById(R.id.recyclerview);
         coordinatorLayout = (CoordinatorLayout) findViewById(R.id.coordinatorLayout);
         context = this;
@@ -142,11 +126,7 @@ public class MyNotes extends AppCompatActivity implements NavigationView.OnNavig
         Cursor c = mydb.fetchAll();
 
 
-       // String[] fieldNames = new String[]{NDb.name, NDb._id, NDb.dates, NDb.remark};
-        //int[] display = new int[]{R.id.txtnamerow, R.id.txtidrow, R.id.txtdate, R.id.txtremark};
-
         //start
-        List<note> noteList=new ArrayList<note>();
         if(c.moveToFirst()) {
             while(!c.isAfterLast()) {
                 note noteObj = new note();
@@ -182,32 +162,6 @@ public class MyNotes extends AppCompatActivity implements NavigationView.OnNavig
             }
         });
 
-        //end
-
-      /*  if(c==null){
-            adapter = new SimpleCursorAdapter(this, R.layout.listtemplate, null, fieldNames, display, 0);
-        }else{
-            adapter = new SimpleCursorAdapter(this, R.layout.listtemplate, c, fieldNames, display, 0);
-        }*/
-
-
-      /*  mylist = (ListView) findViewById(R.id.listView1);
-        mylist.setAdapter(adapter);
-        mylist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-
-            @Override
-            public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
-                LinearLayout linearLayoutParent = (LinearLayout) arg1;
-                LinearLayout linearLayoutChild = (LinearLayout) linearLayoutParent.getChildAt(0);
-                TextView m = (TextView) linearLayoutChild.getChildAt(1);
-                Bundle dataBundle = new Bundle();
-                dataBundle.putInt("id", Integer.parseInt(m.getText().toString()));
-                Intent intent = new Intent(getApplicationContext(), DisplayNote.class);
-                intent.putExtras(dataBundle);
-                startActivity(intent);
-                finish();
-            }
-        });*/
     }
 
 
@@ -254,7 +208,7 @@ public class MyNotes extends AppCompatActivity implements NavigationView.OnNavig
                 c.moveToNext();
             }
         }
-        Recycler_View_Adapter adapter=new Recycler_View_Adapter(noteList,getApplication());
+      adapter=new Recycler_View_Adapter(noteList,getApplication());
         recycler_view.setAdapter(adapter);
         recycler_view.setLayoutManager(new LinearLayoutManager(this));
         recycler_view.setHasFixedSize(true);
@@ -371,25 +325,91 @@ public class MyNotes extends AppCompatActivity implements NavigationView.OnNavig
         startActivity(viewIntent);
     }
 
-   /*@Override
-    public void imageClicked(String text,String remark) {
-        int isImpOrNot=0;
-        isImpOrNot = mydb.getImpBool(text);
-        if ( isImpOrNot == 1 ) {
-           // Toast.makeText(getApplicationContext(),isImpOrNot,Toast.LENGTH_SHORT).show();
-            //img.setImageResource(R.drawable.ic_empty_star);
-            //mydb.updateStar(position + 1, 0);
-        } else {
-            //img.setImageResource(R.drawable.ic_filled_star);
-            //mydb.updateStar(position + 1, 1);
-        }}
-        public int sendImpBool(int position){
-            int result=0;
-         Cursor imp=mydb.sendImpBool(position + 1);
-            if(imp.moveToFirst()){
-            while ( !imp.isAfterLast() ) {
-                result = imp.getInt(imp.getColumnIndex(NDb.isStarred));
-            }}
-            return result;
-        }*/
+   @Override
+    public void imageClicked(String text,String tag) {
+
+       if(tag.equals("R.drawable.ic_filled_star")){
+           mydb.setImpBool(text,0);
+           adapter.notifyDataSetChanged();
+           Cursor c = mydb.fetchAll();
+           List<note> noteList=new ArrayList<note>();
+           if(c.moveToFirst()) {
+               while(!c.isAfterLast()) {
+                   note noteObj = new note();
+                   noteObj.setName(c.getString(c.getColumnIndex("name")));
+                   noteObj.setRemark(c.getString(c.getColumnIndex("remark")));
+                   noteObj.setDates(c.getString(c.getColumnIndex("dates")));
+                   noteObj.setIsStarred(c.getInt(c.getColumnIndex("isStarred")));
+                   noteList.add(noteObj);
+                   c.moveToNext();
+               }
+           }
+           adapter=new Recycler_View_Adapter(noteList,getApplication());
+           recycler_view.setAdapter(adapter);
+           recycler_view.setLayoutManager(new LinearLayoutManager(this));
+           recycler_view.setHasFixedSize(true);
+           adapter.setClickListener(this);
+           recycler_view.addOnScrollListener(new RecyclerView.OnScrollListener() {
+               @Override
+               public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+
+                   if ( newState == RecyclerView.SCROLL_STATE_IDLE ) {
+                       btnadd.show();
+                   }
+                   super.onScrollStateChanged(recyclerView, newState);
+               }
+
+               @Override
+               public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+
+                   if ( dy > 0 || dy < 0 && btnadd.isShown() )
+                       btnadd.hide();
+                   super.onScrolled(recyclerView, dx, dy);
+               }
+           });
+
+       }else{
+           mydb.setImpBool(text,1);
+           adapter.notifyDataSetChanged();
+           Cursor c = mydb.fetchAll();
+           List<note> noteList=new ArrayList<note>();
+           if(c.moveToFirst()) {
+               while(!c.isAfterLast()) {
+                   note noteObj = new note();
+                   noteObj.setName(c.getString(c.getColumnIndex("name")));
+                   noteObj.setRemark(c.getString(c.getColumnIndex("remark")));
+                   noteObj.setDates(c.getString(c.getColumnIndex("dates")));
+                   noteObj.setIsStarred(c.getInt(c.getColumnIndex("isStarred")));
+                   noteList.add(noteObj);
+                   c.moveToNext();
+               }
+           }
+         adapter=new Recycler_View_Adapter(noteList,getApplication());
+           recycler_view.setAdapter(adapter);
+           recycler_view.setLayoutManager(new LinearLayoutManager(this));
+           recycler_view.setHasFixedSize(true);
+           adapter.setClickListener(this);
+           recycler_view.addOnScrollListener(new RecyclerView.OnScrollListener() {
+               @Override
+               public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+
+                   if ( newState == RecyclerView.SCROLL_STATE_IDLE ) {
+                       btnadd.show();
+                   }
+                   super.onScrollStateChanged(recyclerView, newState);
+               }
+
+               @Override
+               public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+
+                   if ( dy > 0 || dy < 0 && btnadd.isShown() )
+                       btnadd.hide();
+                   super.onScrolled(recyclerView, dx, dy);
+               }
+           });
+
+       }
+
+   }
+
 }

@@ -41,15 +41,15 @@ public class DisplayNote extends AppCompatActivity{
     String dateString;
     ActionBar actionBar;
     int isStarred;
-    Menu menu;
     Bundle extras;
-    boolean clickedSaveButton;
-
+    ScheduleClient scheduleClient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.viewnotepad);
+        scheduleClient = new ScheduleClient(this);
+        scheduleClient.doBindService();
         name=(EditText)findViewById(R.id.txtname);
         content=(EditText)findViewById(R.id.txtcontent);
         coordinatorLayout=(CoordinatorLayout)findViewById(R.id.coordinatorLayout);
@@ -264,10 +264,28 @@ public class DisplayNote extends AppCompatActivity{
                     @Override
                     public void onDateSet(DatePicker view, int year,
                                           int monthOfYear, int dayOfMonth) {
-                        Toast.makeText(getApplicationContext(),dayOfMonth + "-" + (monthOfYear+1) + "-" + year,Toast.LENGTH_SHORT).show();
-
+                        Toast.makeText(getApplicationContext(),dayOfMonth + "-" + (monthOfYear+1) + "-" + year+mHour+mMinute,Toast.LENGTH_SHORT).show();
+                        Calendar notificationDT=Calendar.getInstance();
+                        notificationDT.set(year,monthOfYear,dayOfMonth,mHour,mMinute);
+                       /* notificationDT.set(year, monthOfYear , dayOfMonth);
+                        notificationDT.set(Calendar.HOUR_OF_DAY, mHour);
+                        notificationDT.set(Calendar.MINUTE, mMinute);
+                        notificationDT.set(Calendar.SECOND, 0);*/
+                        createNotification(notificationDT,name.getText().toString(),content.getText().toString());
                     }
                 }, mYear, mMonth, mDay);
         datePickerDialog.show();
+    }
+
+    public void createNotification(Calendar notification,String name,String content){
+        scheduleClient.setAlarmForNotification(notification,name,content);
+    }
+    @Override
+    protected void onStop() {
+        // When our activity is stopped ensure we also stop the connection to the service
+        // this stops us leaking our activity into the system *bad*
+        if(scheduleClient != null)
+            scheduleClient.doUnbindService();
+        super.onStop();
     }
 }
