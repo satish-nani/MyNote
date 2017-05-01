@@ -21,12 +21,21 @@
     </item>
     <item
         is-multidex="true"
-        jar="C:\Users\satish nani\workspace\android studio projects\MyNote\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-base\8.3.0\jars\classes.jar"
+        jar="C:\Users\satish nani\workspace\android studio projects\MyNote\app\build\intermediates\exploded-aar\com.android.support\support-core-utils\24.2.1\jars\classes.jar"
         jumboMode="true"
         optimize="true"
         revision="24.0.2"
-        sha1="01a90bbb9495a8bbf6f3cfdf12f1b35caaa9524b">
-        <dex dex="C:\Users\satish nani\workspace\android studio projects\MyNote\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.android.gms-play-services-base-8.3.0_c5e0cb8c8eb6f80d0e76ae555caa1d6b7563cab2\classes.dex" />
+        sha1="9c4c3bc902450c39ed54de170db4fb12aea20a35">
+        <dex dex="C:\Users\satish nani\workspace\android studio projects\MyNote\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-core-utils-24.2.1_ae0c94542215b1ae3df549effbec95772c08cf07\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\satish nani\workspace\android studio projects\MyNote\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-tasks\10.0.1\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.2"
+        sha1="6addaba208e21c6da776d0ca75b6b23a6ccd5499">
+        <dex dex="C:\Users\satish nani\workspace\android studio projects\MyNote\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.android.gms-play-services-tasks-10.0.1_05a6f068e5b70ae21555b067d39049a3b5ff540c\classes.dex" />
     </item>
     <item
         is-multidex="true"
@@ -39,6 +48,69 @@
     </item>
     <item
         is-multidex="true"
+        jar="C:\Users\satish nani\workspace\android studio projects\MyNote\app\build\intermediates\exploded-aar\com.google.firebase\firebase-auth\10.0.1\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.2"
+        sha1="9cca2818594cc5348806d6662133491e7ea0fa8d">
+        <dex dex="C:\Users\satish nani\workspace\android studio projects\MyNote\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.firebase-firebase-auth-10.0.1_696a9d90638751246b71994c0cdd1981401f1bfe\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\satish nani\workspace\android studio projects\MyNote\app\build\intermediates\exploded-aar\com.android.support\support-core-ui\24.2.1\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.2"
+        sha1="e7f3132168957eefc46229fc32c3bd464642b71e">
+        <dex dex="C:\Users\satish nani\workspace\android studio projects\MyNote\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-core-ui-24.2.1_a60437af882b39c07f058f6efb45e234b27fdef0\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\satish nani\workspace\android studio projects\MyNote\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-basement\10.0.1\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.2"
+        sha1="756f6297eef79784f5e356dcd4f39865028b2bd0">
+        <dex dex="C:\Users\satish nani\workspace\android studio projects\MyNote\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.android.gms-play-services-basement-10.0.1_e60d29937140aa09666ff66fd01b1bd2eff005c3\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\satish nani\workspace\android studio projects\MyNote\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-auth-base\10.0.1\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.2"
+        sha1="e96c6974cf924e7ee3b230e6847d5731423388c9">
+        <dex dex="C:\Users\satish nani\workspace\android studio projects\MyNote\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.android.gms-play-services-auth-base-10.0.1_c3b9b884a88684c5d25ef4930fcac70167117c50\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\satish nani\workspace\android studio projects\MyNote\app\build\intermediates\exploded-aar\com.google.firebase\firebase-analytics\10.0.1\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.2"
+        sha1="433f4d6aa5f21f19552afe0e6c5eff0fedba73ad">
+        <dex dex="C:\Users\satish nani\workspace\android studio projects\MyNote\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.firebase-firebase-analytics-10.0.1_5a3aa0d89115b37491267a9cec43909317777bb9\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\satish nani\workspace\android studio projects\MyNote\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-base\10.0.1\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.2"
+        sha1="25438f55fc6d906a0e72f30b21487541430ede43">
+        <dex dex="C:\Users\satish nani\workspace\android studio projects\MyNote\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.android.gms-play-services-base-10.0.1_00f2da50c51ac0af4cedd4cb5338a12ec748e031\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\satish nani\workspace\android studio projects\MyNote\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-auth\10.0.1\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.2"
+        sha1="e2185aff89caeb337b1ffc36d5e525d8318e7cfe">
+        <dex dex="C:\Users\satish nani\workspace\android studio projects\MyNote\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.android.gms-play-services-auth-10.0.1_64613eda5b73e5b9150e350bb9260384f6513549\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
         jar="C:\Users\satish nani\workspace\android studio projects\MyNote\app\build\intermediates\exploded-aar\com.android.support\support-fragment\24.2.1\jars\libs\internal_impl-24.2.1.jar"
         jumboMode="true"
         optimize="true"
@@ -48,12 +120,30 @@
     </item>
     <item
         is-multidex="true"
+        jar="C:\Users\satish nani\workspace\android studio projects\MyNote\app\build\intermediates\exploded-aar\com.android.support\support-vector-drawable\24.2.1\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.2"
+        sha1="d5c731fc64c03dfe04d51134955b483551c35849">
+        <dex dex="C:\Users\satish nani\workspace\android studio projects\MyNote\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-vector-drawable-24.2.1_8d14a70a9c4e4bc0c8f26dfad402275a4a3f67aa\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
         jar="C:\Users\satish nani\workspace\android studio projects\MyNote\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
         jumboMode="true"
         optimize="true"
         revision="24.0.2"
-        sha1="c80770e12901ce793c293c2cc88070b45c3b7b38">
+        sha1="b111ae0ad8c6ed8321c5cb65e00ed5b12debfe1a">
         <dex dex="C:\Users\satish nani\workspace\android studio projects\MyNote\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run-bootstrap_d840c06db2a172245ca3c23e20264b926b6ac6df\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\satish nani\workspace\android studio projects\MyNote\app\build\intermediates\exploded-aar\com.android.support\support-core-ui\24.2.1\jars\libs\internal_impl-24.2.1.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.2"
+        sha1="867dad63c33388ff8c7644b236579355036d075f">
+        <dex dex="C:\Users\satish nani\workspace\android studio projects\MyNote\app\build\intermediates\transforms\dex\debug\folders\1000\10\internal_impl-24.2.1_16a5ca0d8d30500970292a569928a66af6bfac03\classes.dex" />
     </item>
     <item
         is-multidex="true"
@@ -66,12 +156,57 @@
     </item>
     <item
         is-multidex="true"
+        jar="C:\Users\satish nani\workspace\android studio projects\MyNote\app\build\intermediates\exploded-aar\com.android.support\animated-vector-drawable\24.2.1\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.2"
+        sha1="94bc1dfb84dcc8b6f6f8f7cc726d7b2dd39c1574">
+        <dex dex="C:\Users\satish nani\workspace\android studio projects\MyNote\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-animated-vector-drawable-24.2.1_3470218d0329df84c26df03fc0a7c70c7f7a3a9f\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\satish nani\workspace\android studio projects\MyNote\app\build\intermediates\exploded-aar\com.android.support\support-compat\24.2.1\jars\libs\internal_impl-24.2.1.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.2"
+        sha1="7e4389bd133359a2ff88623ff1e4ff93d6e6f780">
+        <dex dex="C:\Users\satish nani\workspace\android studio projects\MyNote\app\build\intermediates\transforms\dex\debug\folders\1000\10\internal_impl-24.2.1_1106c0a6488bd942469a8b4ba9aae9a47243fd2e\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\satish nani\workspace\android studio projects\MyNote\app\build\intermediates\exploded-aar\com.google.firebase\firebase-analytics-impl\10.0.1\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.2"
+        sha1="6116e0e7069de7fc259aac8e08b84f32c2038231">
+        <dex dex="C:\Users\satish nani\workspace\android studio projects\MyNote\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.firebase-firebase-analytics-impl-10.0.1_8c369f3e357d33ac66703b6d22e39a687f70c48e\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\satish nani\workspace\android studio projects\MyNote\app\build\intermediates\exploded-aar\com.google.firebase\firebase-iid\10.0.1\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.2"
+        sha1="486371f97baad8e607f332f20fee1d3dd00a731a">
+        <dex dex="C:\Users\satish nani\workspace\android studio projects\MyNote\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.firebase-firebase-iid-10.0.1_38fb4c9a0862d4752cb19303de4d2bbae933b190\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
         jar="C:\Users\satish nani\workspace\android studio projects\MyNote\app\build\intermediates\exploded-aar\com.android.support\cardview-v7\24.2.1\jars\classes.jar"
         jumboMode="true"
         optimize="true"
         revision="24.0.2"
         sha1="c5e6490573cd2cc8018417f60ddd251138b6ed61">
         <dex dex="C:\Users\satish nani\workspace\android studio projects\MyNote\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-cardview-v7-24.2.1_9e5827805f3e338033f32e306fe23882998d44fe\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\satish nani\workspace\android studio projects\MyNote\app\build\intermediates\incremental-runtime-classes\debug\instant-run.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.2"
+        sha1="f5e3d55cba3d18b6978133d13bc3f6c6425e571f">
+        <dex dex="C:\Users\satish nani\workspace\android studio projects\MyNote\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run_dedbcb80595056c79afef0c961ffa1178078a101\classes.dex" />
     </item>
     <item
         is-multidex="true"
@@ -102,111 +237,21 @@
     </item>
     <item
         is-multidex="true"
+        jar="C:\Users\satish nani\workspace\android studio projects\MyNote\app\build\intermediates\exploded-aar\com.google.firebase\firebase-common\10.0.1\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.2"
+        sha1="eb0d830e3eabb9deb9ec44869cf7ac7ea1ad794c">
+        <dex dex="C:\Users\satish nani\workspace\android studio projects\MyNote\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.firebase-firebase-common-10.0.1_28599b538bb9851a7731bab4e637c62e3edb36ef\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
         jar="C:\Users\satish nani\workspace\android studio projects\MyNote\app\build\intermediates\exploded-aar\com.android.support\recyclerview-v7\24.2.1\jars\classes.jar"
         jumboMode="true"
         optimize="true"
         revision="24.0.2"
         sha1="7521486d9bfd2cd9e756e0cf75ed7d97f2ce2d3b">
         <dex dex="C:\Users\satish nani\workspace\android studio projects\MyNote\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-recyclerview-v7-24.2.1_ac0b3337776e7cbffd12f6dce39bf5f7a69471c1\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\satish nani\workspace\android studio projects\MyNote\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-basement\8.3.0\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="24.0.2"
-        sha1="345a1b5cf5b144ce18ba6962bc66a7e2f26c1c1b">
-        <dex dex="C:\Users\satish nani\workspace\android studio projects\MyNote\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.android.gms-play-services-basement-8.3.0_620e2b349d288a42452cc52158cd3315bde01f41\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\satish nani\workspace\android studio projects\MyNote\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-measurement\8.3.0\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="24.0.2"
-        sha1="b000ecceb9877fefcdc7ab1959ff03df91551656">
-        <dex dex="C:\Users\satish nani\workspace\android studio projects\MyNote\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.android.gms-play-services-measurement-8.3.0_b2967e7ead229f5b226216f6b5dc403706f8223a\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\satish nani\workspace\android studio projects\MyNote\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\24.2.1\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="24.0.2"
-        sha1="43b2dba6b5a0b14527961b75329d0b90025f15ea">
-        <dex dex="C:\Users\satish nani\workspace\android studio projects\MyNote\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-appcompat-v7-24.2.1_bd9cc9a84d42ba037a3c057e884339aab36798c7\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\satish nani\workspace\android studio projects\MyNote\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-auth\8.3.0\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="24.0.2"
-        sha1="fd76d95678a6b2b8a49bb8a9fb5bcef7aedb70e7">
-        <dex dex="C:\Users\satish nani\workspace\android studio projects\MyNote\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.google.android.gms-play-services-auth-8.3.0_be0ccdbe968fa2938eeda49ba9b63dc0ea57cc79\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\satish nani\workspace\android studio projects\MyNote\app\build\intermediates\exploded-aar\com.android.support\support-core-utils\24.2.1\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="24.0.2"
-        sha1="9c4c3bc902450c39ed54de170db4fb12aea20a35">
-        <dex dex="C:\Users\satish nani\workspace\android studio projects\MyNote\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-core-utils-24.2.1_ae0c94542215b1ae3df549effbec95772c08cf07\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\satish nani\workspace\android studio projects\MyNote\app\build\intermediates\exploded-aar\com.android.support\support-core-ui\24.2.1\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="24.0.2"
-        sha1="e7f3132168957eefc46229fc32c3bd464642b71e">
-        <dex dex="C:\Users\satish nani\workspace\android studio projects\MyNote\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-core-ui-24.2.1_a60437af882b39c07f058f6efb45e234b27fdef0\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\satish nani\workspace\android studio projects\MyNote\app\build\intermediates\exploded-aar\com.android.support\support-vector-drawable\24.2.1\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="24.0.2"
-        sha1="d5c731fc64c03dfe04d51134955b483551c35849">
-        <dex dex="C:\Users\satish nani\workspace\android studio projects\MyNote\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-vector-drawable-24.2.1_8d14a70a9c4e4bc0c8f26dfad402275a4a3f67aa\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\satish nani\workspace\android studio projects\MyNote\app\build\intermediates\exploded-aar\com.android.support\support-core-ui\24.2.1\jars\libs\internal_impl-24.2.1.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="24.0.2"
-        sha1="867dad63c33388ff8c7644b236579355036d075f">
-        <dex dex="C:\Users\satish nani\workspace\android studio projects\MyNote\app\build\intermediates\transforms\dex\debug\folders\1000\10\internal_impl-24.2.1_16a5ca0d8d30500970292a569928a66af6bfac03\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\satish nani\workspace\android studio projects\MyNote\app\build\intermediates\exploded-aar\com.android.support\animated-vector-drawable\24.2.1\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="24.0.2"
-        sha1="94bc1dfb84dcc8b6f6f8f7cc726d7b2dd39c1574">
-        <dex dex="C:\Users\satish nani\workspace\android studio projects\MyNote\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-animated-vector-drawable-24.2.1_3470218d0329df84c26df03fc0a7c70c7f7a3a9f\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\satish nani\workspace\android studio projects\MyNote\app\build\intermediates\exploded-aar\com.android.support\support-compat\24.2.1\jars\libs\internal_impl-24.2.1.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="24.0.2"
-        sha1="7e4389bd133359a2ff88623ff1e4ff93d6e6f780">
-        <dex dex="C:\Users\satish nani\workspace\android studio projects\MyNote\app\build\intermediates\transforms\dex\debug\folders\1000\10\internal_impl-24.2.1_1106c0a6488bd942469a8b4ba9aae9a47243fd2e\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\satish nani\workspace\android studio projects\MyNote\app\build\intermediates\incremental-runtime-classes\debug\instant-run.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="24.0.2"
-        sha1="a1348b930ca0292efd70e242648544fb9988bdc7">
-        <dex dex="C:\Users\satish nani\workspace\android studio projects\MyNote\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run_dedbcb80595056c79afef0c961ffa1178078a101\classes.dex" />
     </item>
     <item
         is-multidex="true"
@@ -225,6 +270,15 @@
         revision="24.0.2"
         sha1="d7c42c80f6509b9ea4db28ca7859ffae08ec5741">
         <dex dex="C:\Users\satish nani\workspace\android studio projects\MyNote\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-v4-24.2.1_7863e69058c0dfe7ccd7297779a7d9585eddd6e6\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\satish nani\workspace\android studio projects\MyNote\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\24.2.1\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.2"
+        sha1="43b2dba6b5a0b14527961b75329d0b90025f15ea">
+        <dex dex="C:\Users\satish nani\workspace\android studio projects\MyNote\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-appcompat-v7-24.2.1_bd9cc9a84d42ba037a3c057e884339aab36798c7\classes.dex" />
     </item>
 
 </items>

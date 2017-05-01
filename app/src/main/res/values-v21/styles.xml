@@ -5,11 +5,49 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:statusBarColor">@android:color/transparent</item>
+
+
+        <!--  It should be true otherwise action mode will not overlay toolbar -->
+        <item name="windowActionModeOverlay">true</item>
+
+        <!--  For Custom Action Mode Background Color/Drawable -->
+        <!--<item name="actionModeBackground">@color/colorAccent</item>-->
+
     </style>
+
+    <style name="MyButton" parent="AppTheme">
+        <item name="colorControlHighlight">@color/colorAccent</item>
+        <item name="colorButtonNormal">@android:color/white</item>
+    </style>
+
 
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="LoginScreen" parent="AppTheme">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">false</item>
+        <item name="@android:statusBarColor">@color/colorPrimaryDark</item>
+    </style>
+
+    <style name="WelcomeScreen" parent="AppTheme.ActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">false</item>
+        <item name="@android:statusBarColor">@color/colorPrimaryDark</item>
+    </style>
+        <!--Theme for Splash screen-->
+    <style name="SplashTheme" parent="AppTheme.ActionBar">
+        <item name="android:windowBackground">@drawable/background_splash</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="@android:statusBarColor">@color/colorPrimaryDark</item>
+    </style>
+
+    <style name="SplashScreenTheme" parent="AppTheme.ActionBar">
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="android:colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="@android:statusBarColor">@color/colorPrimaryDark</item>
     </style>
 
     <style name="AppTheme.ActionBar">
@@ -21,7 +59,6 @@
     <style name="menu_item" parent="TextAppearance.AppCompat.Medium">
         <item name="android:textSize">14sp</item>
         <item name="android:fontFamily">sans-serif-medium</item>
-        <item name="android:textColor">@color/itemColor</item>
         <item name="android:paddingTop">@dimen/item_name_padding_Top</item>
         <item name="android:paddingBottom">@dimen/item_name_padding_Bottom</item>
         <item name="android:paddingLeft">@dimen/item_name_padding_Left</item>

@@ -12,4 +12,21 @@
         android:orderInCategory="200"
         android:title="Delete all"
         app:showAsAction="never"/>
+    <item
+        android:id="@+id/listView"
+        android:orderInCategory="300"
+        android:title="List"
+        app:showAsAction="always"
+        android:icon="@drawable/view_list"/>
+   <!-- <item
+        android:id="@+id/deleteSignInDetails"
+        android:orderInCategory="200"
+        android:title="Delete signIn"
+        app:showAsAction="never"/>-->
+    <item
+        android:id="@+id/gridView"
+        android:orderInCategory="400"
+        android:title="Grid"
+        app:showAsAction="always"
+        android:icon="@drawable/view_grid"/>
 </menu>

@@ -6,10 +6,8 @@ import android.database.Cursor;
 import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-
-import java.sql.Blob;
 import java.util.ArrayList;
-import java.util.HashMap;
+
 
 /**
  * Created by satish on 20/10/2016.
@@ -24,6 +22,7 @@ public class NDb extends SQLiteOpenHelper {
     public static final String mynotes="mynotes";
     public static final String signInDetails="signInDetails";
     public static final String isStarred="isStarred";
+    public static String hasAlarm="hasAlarm";
 
     SQLiteDatabase db;
 
@@ -37,10 +36,10 @@ public class NDb extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
 
         db.execSQL("create table mynotes"
-                + "(_id integer primary key, name text,remark text,dates text,isStarred integer)");
+                + "(_id integer primary key, name text,remark text,dates text,isStarred integer,hasAlarm integer)");
 
         db.execSQL("create table signInDetails"
-                + "(_id integer primary key, name text,emailId text,photoUrl text)");
+                + "(_id integer primary key, name text,emailId text,photoUrl text,loginType text)");
     }
 
     //Used to update the database like adding tables,deleting tables, columns ,rows etc.,
@@ -63,16 +62,28 @@ public class NDb extends SQLiteOpenHelper {
     }
 
     //Used to fetch signInDetails from the database
-    public Cursor fetchSignInDetails(){
+    public Cursor fetchSignInDetails(String loginType){
         db=this.getReadableDatabase();
-        Cursor mCursor=db.query(signInDetails, new String[] { "name",
-                "emailId", "photoUrl" }, null, null, null, null, null);
+        Cursor mCursor=db.rawQuery("select * from " +  signInDetails+ " where " +loginType +"=?", new String [] {loginType});
+        /*db.query(signInDetails, new String[] { "name",
+                "emailId", "photoUrl","loginType" }, null, null, null, null, null);*/
         if(mCursor!=null){
             mCursor.moveToFirst();
         }
         return mCursor;
     }
 
+    public Cursor fetchSignInDetails(){
+        db=this.getReadableDatabase();
+        Cursor mCursor=db.query(signInDetails, new String[] { "_id","name",
+                "emailId","loginType"}, null, null, null, null, null);
+        /*db.query(signInDetails, new String[] { "name",
+                "emailId", "photoUrl","loginType" }, null, null, null, null, null);*/
+        if(mCursor!=null){
+            mCursor.moveToFirst();
+        }
+        return mCursor;
+    }
 
     //Used to insert notes into the database
     public boolean insertNotes(String name, String dates,String remark,int isStarred){
@@ -88,13 +99,14 @@ public class NDb extends SQLiteOpenHelper {
     }
 
     //Used to insert gplus signInDetails into the database
-    public boolean insertSignInDetails(String name,String emailId,String photoUrl){
+    public boolean insertSignInDetails(String name,String emailId,String photoUrl,String loginType){
 
         SQLiteDatabase db=this.getWritableDatabase();
         ContentValues contentValues=new ContentValues();
         contentValues.put("name",name);
         contentValues.put("emailId", emailId);
         contentValues.put("photoUrl",photoUrl);
+        contentValues.put("loginType",loginType);
         db.insert(signInDetails,null,contentValues);
 
         return true;
@@ -127,15 +139,6 @@ public class NDb extends SQLiteOpenHelper {
         return true;
     }
 
-    public boolean updateStar(int id,int isStarred){
-
-        SQLiteDatabase db=this.getWritableDatabase();
-        ContentValues contentValues=new ContentValues();
-        contentValues.put("isStarred",isStarred);
-        db.update(mynotes,contentValues,"_id=?",new String[]{Integer.toString(id)});
-        return true;
-    }
-
     //Used to delete a record mentioned by the given id
     public Integer deleteNotes(Integer id){
         SQLiteDatabase db=this.getWritableDatabase();
@@ -147,19 +150,8 @@ public class NDb extends SQLiteOpenHelper {
         return db.delete(mynotes,null,null);
     }
 
-    public int getImpBool(String text){
-        db=this.getReadableDatabase();
-        int result=0;
-        Cursor isImpOrNot=db.rawQuery("select * from " + mynotes + " where " +name +"=?", new String [] {text});
-        if(isImpOrNot.moveToFirst()){
-            while ( !isImpOrNot.isAfterLast() ){
-                result=isImpOrNot.getInt(isImpOrNot.getColumnIndex(NDb.isStarred));
-            }
-        }
-        return result;
-    }
-
     //Used to delete signInDetails in the table
+
     public Integer deleteSignInDetails(){
         SQLiteDatabase db=this.getWritableDatabase();
         return db.delete(signInDetails,null,null);
@@ -215,4 +207,30 @@ public class NDb extends SQLiteOpenHelper {
         return isImpOrNot;
     }
 
+    public String createAlarm(String noteName,String remarks){
+        String result="";
+        SQLiteDatabase db=this.getWritableDatabase();
+        ContentValues contentValues=new ContentValues();
+        contentValues.put(hasAlarm,1);
+        db.update(mynotes,contentValues,name+"= ?",new String[]{noteName});
+        return result;
+    }
+
+    public ArrayList<note> getRemainderNotes() {
+        ArrayList<note> starredNotes = new ArrayList<note>();
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor res = db.rawQuery("select * from " + mynotes + " where " + NDb.hasAlarm + " =1", null);
+        res.moveToFirst();
+        while ( res.isAfterLast() == false ) {
+            note noteObj = new note();
+            //starredNotes.add(res.getString(res.getColumnIndex("_id")));
+            noteObj.setRemark(res.getString(res.getColumnIndex(remark)));
+            noteObj.setDates(res.getString(res.getColumnIndex(dates)));
+            noteObj.setName(res.getString(res.getColumnIndex(name)));
+            noteObj.setIsStarred(res.getInt(res.getColumnIndex(isStarred)));
+            starredNotes.add(noteObj);
+            res.moveToNext();
+        }
+        return starredNotes;
+    }
 }

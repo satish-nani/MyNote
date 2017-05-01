@@ -1,31 +1,28 @@
 package com.programmingbear.mynote;
 
+
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
-import android.app.Dialog;
 import android.app.TimePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.os.Handler;
-import android.provider.Settings;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TimePicker;
 import android.widget.Toast;
-
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+
 
 /**
  * Created by satish on 23/10/2016.
@@ -54,10 +51,13 @@ public class DisplayNote extends AppCompatActivity{
         content=(EditText)findViewById(R.id.txtcontent);
         coordinatorLayout=(CoordinatorLayout)findViewById(R.id.coordinatorLayout);
         actionBar=getSupportActionBar();
-        actionBar.setDisplayHomeAsUpEnabled(true);
+        try {
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }catch(Exception e){
+
+        }
         mydb=new NDb(this);
         extras=getIntent().getExtras();
-        String type=extras.getString("Type");
         int Value=extras.getInt("id");
            /* if(Value>0){
             snackbar=Snackbar.make(coordinatorLayout,"Note priority things first :P", Snackbar.LENGTH_SHORT);
@@ -80,10 +80,11 @@ public class DisplayNote extends AppCompatActivity{
             isStarred=rs.getInt(rs.getColumnIndex(NDb.isStarred));
                 name.setText(extras.getString("text"));
                 content.setText(extras.getString("remark"));
-            }
+            }else if(Value==0){
+            name.setText(extras.getString(""));
+            content.setText(extras.getString(""));
+        }
     }
-
-
 
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
@@ -111,7 +112,6 @@ public class DisplayNote extends AppCompatActivity{
         return true;
     }
 
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         super.onOptionsItemSelected(item);
@@ -121,81 +121,12 @@ public class DisplayNote extends AppCompatActivity{
                 startActivity(homeIntent);
                 return true;
             case R.id.Delete:
-                AlertDialog.Builder builder = new AlertDialog.Builder(this);
-                builder.setMessage(R.string.DeleteNote).setPositiveButton("YES", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int id) {
-                        mydb.deleteNotes(id_To_Update);
-                        Toast.makeText(DisplayNote.this, "Deleted Successfully", Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(getApplicationContext(), MyNotes.class);
-                        startActivity(intent);
-                        finish();
-                    }
-                }).setNegativeButton("NO", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-
-                    }
-                });
-                AlertDialog d = builder.create();
-                d.setTitle("Are you sure ");
-                d.show();
+                deleteNote();
                 return true;
             case R.id.Save:
-                Bundle extras = getIntent().getExtras();
-                Calendar c = Calendar.getInstance();
-                SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
-                String formattedDate = df.format(c.getTime());
-                dateString = formattedDate;
-                if (extras != null) {
-                    String type = extras.getString("Type");
-                    if (!(type.equals("new"))) {
-                        if (content.getText().toString().trim().equals("") || name.getText().toString().trim().equals("")) {
-                            snackbar = Snackbar.make(coordinatorLayout, "Please enter the note details", Snackbar.LENGTH_SHORT);
-                            snackbar.show();
-                        } else {
-                            if (mydb.updateNotes(id_To_Update, name.getText().toString(), dateString, content.getText().toString(),isStarred)) {
-                                snackbar = Snackbar.make(coordinatorLayout, "We are upto date with you :)", Snackbar.LENGTH_SHORT);
-                                snackbar.show();
-                                new Handler().postDelayed(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        finish();
-                                    }
-                                }, 1000);
-
-                            } else {
-                                snackbar = Snackbar.make(coordinatorLayout, "Something happened, sorry :(", Snackbar.LENGTH_SHORT);
-                                snackbar.show();
-                            }
-                        }
-                    } else if(type.equals("new")){
-                        if (content.getText().toString().trim().equals("") || name.getText().toString().trim().equals("")) {
-                            snackbar = Snackbar.make(coordinatorLayout, "Please enter the note details", Snackbar.LENGTH_SHORT);
-                            snackbar.show();
-                        } else {
-                            if (mydb.insertNotes(name.getText().toString(), dateString, content.getText().toString(),isStarred)) {
-                                snackbar = Snackbar.make(coordinatorLayout, "Your note is with us. Don't worry!", Snackbar.LENGTH_SHORT);
-                                snackbar.show();
-                                new Handler().postDelayed(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        Intent intent=new Intent();
-                                        setResult(RESULT_OK,intent);
-                                        finish();
-                                    }
-                                }, 1000);
-                            } else {
-                                snackbar = Snackbar.make(coordinatorLayout, "Something happened, sorry :(", Snackbar.LENGTH_SHORT);
-                                snackbar.show();
-                            }
-                        }
-
-                    }
-                }
+                saveNote();
                 return true;
             case R.id.Starred:
-
                 item.setVisible(false);
                 isStarred=1;
                 snackbar=Snackbar.make(coordinatorLayout,"Save the note to reflect the changes",Snackbar.LENGTH_SHORT);
@@ -207,23 +138,19 @@ public class DisplayNote extends AppCompatActivity{
                 return true;
             case R.id.PickTime:
                 int currentHour,currentMinute;
-
                 Calendar ca = Calendar.getInstance();
                 currentHour = ca.get(Calendar.HOUR_OF_DAY);
                 currentMinute = ca.get(Calendar.MINUTE);
-
                 // Launch Time Picker Dialog
                 TimePickerDialog tpd = new TimePickerDialog(this,
                         new TimePickerDialog.OnTimeSetListener() {
-                            int futureHour,futureMinute;
                             @Override
                             public void onTimeSet(TimePicker view, int hourOfDay,
                                                   int minute) {
                                 sendPickedTime(hourOfDay,minute);
-                                Toast.makeText(getApplicationContext(),hourOfDay + ":" + minute,Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getApplicationContext(),hourOfDay + " : " + minute,Toast.LENGTH_SHORT).show();
                             }
                         }, currentHour, currentMinute, true);
-
                 tpd.show();
                 return true;
             default:
@@ -239,16 +166,6 @@ public class DisplayNote extends AppCompatActivity{
         finish();
     }
 
-   /* public void starClick(int position){
-
-        int isImpOrNot;
-        Cursor imp=mydb.getImpBool(position+1);
-        imp.moveToFirst();
-        while(!imp.isAfterLast()){
-            isImpOrNot=imp.getInt(imp.getColumnIndex("isStarred"));
-        }
-    }*/
-
     public void sendPickedTime(final int mHour, final int mMinute){
 
         int mYear,mMonth,mDay;
@@ -256,21 +173,18 @@ public class DisplayNote extends AppCompatActivity{
         mYear = c.get(Calendar.YEAR);
         mMonth = c.get(Calendar.MONTH);
         mDay = c.get(Calendar.DAY_OF_MONTH);
-
-
         DatePickerDialog datePickerDialog = new DatePickerDialog(this,
                 new DatePickerDialog.OnDateSetListener() {
 
                     @Override
                     public void onDateSet(DatePicker view, int year,
                                           int monthOfYear, int dayOfMonth) {
-                        Toast.makeText(getApplicationContext(),dayOfMonth + "-" + (monthOfYear+1) + "-" + year+mHour+mMinute,Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(),dayOfMonth + "/" + (monthOfYear+1) + "/" + year+"/n"+mHour+":"+mMinute,Toast.LENGTH_SHORT).show();
                         Calendar notificationDT=Calendar.getInstance();
-                        notificationDT.set(year,monthOfYear,dayOfMonth,mHour,mMinute);
-                       /* notificationDT.set(year, monthOfYear , dayOfMonth);
+                       notificationDT.set(year, monthOfYear , dayOfMonth);
                         notificationDT.set(Calendar.HOUR_OF_DAY, mHour);
                         notificationDT.set(Calendar.MINUTE, mMinute);
-                        notificationDT.set(Calendar.SECOND, 0);*/
+                        notificationDT.set(Calendar.SECOND, 0);
                         createNotification(notificationDT,name.getText().toString(),content.getText().toString());
                     }
                 }, mYear, mMonth, mDay);
@@ -278,8 +192,12 @@ public class DisplayNote extends AppCompatActivity{
     }
 
     public void createNotification(Calendar notification,String name,String content){
+
         scheduleClient.setAlarmForNotification(notification,name,content);
+        mydb.createAlarm(name,content);
+
     }
+
     @Override
     protected void onStop() {
         // When our activity is stopped ensure we also stop the connection to the service
@@ -287,5 +205,85 @@ public class DisplayNote extends AppCompatActivity{
         if(scheduleClient != null)
             scheduleClient.doUnbindService();
         super.onStop();
+    }
+
+    public void saveNote(){
+
+        Bundle extras = getIntent().getExtras();
+        Calendar c = Calendar.getInstance();
+        SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+        String dateString = df.format(c.getTime());
+        if (extras != null) {
+            String type = extras.getString("Type");
+            if (!(type.equals("new"))) {
+                if (content.getText().toString().trim().equals("") || name.getText().toString().trim().equals("")) {
+                    snackbar = Snackbar.make(coordinatorLayout, "Please enter the note details", Snackbar.LENGTH_SHORT);
+                    snackbar.show();
+                } else {
+                    if (mydb.updateNotes(id_To_Update, name.getText().toString(), dateString, content.getText().toString(),isStarred)) {
+                        InputMethodManager imm = (InputMethodManager)getSystemService(INPUT_METHOD_SERVICE);
+                        imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+                        snackbar = Snackbar.make(coordinatorLayout, "We are upto date with you :)", Snackbar.LENGTH_SHORT);
+                        snackbar.show();
+                        new Handler().postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                finish();
+                            }
+                        }, 1000);
+
+                    } else {
+                        snackbar = Snackbar.make(coordinatorLayout, "Something happened, sorry :(", Snackbar.LENGTH_SHORT);
+                        snackbar.show();
+                    }
+                }
+            } else if(type.equals("new")){
+                if (content.getText().toString().trim().equals("") || name.getText().toString().trim().equals("")) {
+                    snackbar = Snackbar.make(coordinatorLayout, "Please enter the note details", Snackbar.LENGTH_SHORT);
+                    snackbar.show();
+                } else {
+                    if (mydb.insertNotes(name.getText().toString(), dateString, content.getText().toString(),isStarred)) {
+                        InputMethodManager imm = (InputMethodManager)getSystemService(INPUT_METHOD_SERVICE);
+                        imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+                        snackbar = Snackbar.make(coordinatorLayout, "Your note is with us. Don't worry!", Snackbar.LENGTH_SHORT);
+                        snackbar.show();
+                        new Handler().postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                Intent intent=new Intent();
+                                setResult(RESULT_OK,intent);
+                                finish();
+                            }
+                        }, 1000);
+                    } else {
+                        snackbar = Snackbar.make(coordinatorLayout, "Something happened, sorry :(", Snackbar.LENGTH_SHORT);
+                        snackbar.show();
+                    }
+                }
+
+            }
+        }
+    }
+
+    public void deleteNote(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage(R.string.DeleteNote).setPositiveButton("YES", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int id) {
+                mydb.deleteNotes(id_To_Update);
+                Toast.makeText(DisplayNote.this, "Deleted Successfully", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getApplicationContext(), MyNotes.class);
+                startActivity(intent);
+                finish();
+            }
+        }).setNegativeButton("NO", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+            }
+        });
+        AlertDialog d = builder.create();
+        d.setTitle("Deleted Note cannot be restored");
+        d.show();
     }
 }

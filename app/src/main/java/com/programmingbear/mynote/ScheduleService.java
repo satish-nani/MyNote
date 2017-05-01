@@ -1,7 +1,6 @@
 package com.programmingbear.mynote;
 
 import java.util.Calendar;
-
 import android.app.Service;
 import android.content.Intent;
 import android.os.Binder;
@@ -16,6 +15,7 @@ public class ScheduleService extends Service {
      */
     public class ServiceBinder extends Binder {
         ScheduleService getService() {
+
             return ScheduleService.this;
         }
     }

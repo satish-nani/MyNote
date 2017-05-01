@@ -1,7 +1,9 @@
 {
   "project_info": {
     "project_number": "307919285456",
-    "project_id": "my-note-946950"
+    "firebase_url": "https://my-note-946950.firebaseio.com",
+    "project_id": "my-note-946950",
+    "storage_bucket": "my-note-946950.appspot.com"
   },
   "client": [
     {
@@ -17,8 +19,12 @@
           "client_type": 1,
           "android_info": {
             "package_name": "com.programmingbear.mynote",
-            "certificate_hash": "540E94AB9476179561A7C4F8B8A0535433F7764C"
+            "certificate_hash": "540e94ab9476179561a7c4f8b8a0535433f7764c"
           }
+        },
+        {
+          "client_id": "307919285456-ui7o1lj0c8pd31v3rmi7q0lshcaveob0.apps.googleusercontent.com",
+          "client_type": 3
         },
         {
           "client_id": "307919285456-4t1hm5crcu5nftre4rejf2v3dh0qs5kn.apps.googleusercontent.com",
@@ -35,11 +41,16 @@
           "status": 1
         },
         "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": []
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "307919285456-ui7o1lj0c8pd31v3rmi7q0lshcaveob0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         },
         "ads_service": {
-          "status": 1
+          "status": 2
         }
       }
     }

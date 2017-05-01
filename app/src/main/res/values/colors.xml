@@ -5,4 +5,6 @@
     <color name="colorAccent">#FFAB40</color>
     <color name="iconColor">#8c000000</color>
     <color name="itemColor">#000000</color>
+    <color name="starRipple">#E0E0E0</color>
+    <color name="rippleColor">#BDBDBD</color>
 </resources>

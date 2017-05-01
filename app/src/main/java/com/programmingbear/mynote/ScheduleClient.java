@@ -24,6 +24,7 @@ public class ScheduleClient {
      boolean mIsBound;
 
     public ScheduleClient(Context context) {
+
         this.mContext = context;
     }
 

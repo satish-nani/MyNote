@@ -8,7 +8,6 @@
     android:paddingLeft="12dp"
     android:paddingTop="6dp"
     android:paddingBottom="6dp"
-    android:background="@drawable/custom_bg"
 
     >
     <android.support.v7.widget.CardView
@@ -18,7 +17,11 @@
         app:cardElevation="2dp"
         app:cardCornerRadius="4dp"
         android:layout_margin="4dp"
-        android:background="@drawable/custom_bg"
+        android:foreground="?attr/selectableItemBackground"
+        android:stateListAnimator="@drawable/lift_on_touch"
+        android:clickable="true"
+        app:cardPreventCornerOverlap="false"
+        app:cardUseCompatPadding="false"
         >
 
         <LinearLayout
@@ -34,8 +37,8 @@
                 android:layout_height="0dp"
                 android:layout_weight="1"
                 android:orientation="horizontal"
-                android:weightSum="2">
-
+                android:weightSum="2"
+                >
                 <TextView
                     android:id="@+id/txtnamerow"
                     android:layout_width="0dp"
@@ -44,34 +47,23 @@
                     android:text="name"
                     android:padding="6dp"
                     android:textSize="20sp"
+                    android:maxLines="2"
+                    android:ellipsize="end"
                     android:textColor="#000000"/>
-
-                <TextView
-                    android:id="@+id/txtidrow"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0"
-                    android:visibility="gone"/>
 
                 <ImageView
                     android:id="@+id/is_starred"
                     android:layout_width="0dp"
                     android:layout_weight="0.2"
-                    android:layout_height="wrap_content"
+                    android:layout_height="40dp"
                     android:padding="4dp"
-                    android:src="@drawable/ic_empty_star"
+                    android:src="@drawable/empty_star"
+                    android:background="@drawable/custom"
+                    android:hapticFeedbackEnabled="true"
+                    android:clickable="true"
+                    android:focusable="true"
+                    >
                     ></ImageView>
-                <!--<TextView
-                    android:id="@+id/txtdate"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.8"
-                    android:padding="6dp"
-                    android:layout_marginRight="5dp"
-                    android:text="2/2/2016"
-                    android:gravity="right"
-                    android:textColor="#000000"
-                    />-->
             </LinearLayout>
 
             <LinearLayout
@@ -88,7 +80,7 @@
                     android:layout_weight="2"
                     android:padding="8dp"
                     android:maxHeight="50dp"
-                    android:text="S.V.SATISH KUMAR"
+                    android:text="Content"
                     android:textSize="15sp"
                     android:textColor="#000000"
                     android:maxLines="1"

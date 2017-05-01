@@ -18,7 +18,7 @@
             android:id="@+id/nav_remainders"
             android:icon="@drawable/ic_alarm"
             android:title="@string/nav_remainders" />
-        <item
+        <!--<item
             android:id="@+id/nav_todo"
             android:icon="@drawable/ic_schedule"
             android:title="@string/nav_todo" />
@@ -26,7 +26,7 @@
             android:id="@+id/nav_checklists"
             android:icon="@drawable/ic_checkbox"
             android:title="@string/nav_checklists"
-            />
+            />-->
         <item
             android:id="@+id/google_plus_logout"
             android:title="@string/google_plus_logout"
@@ -40,10 +40,10 @@
                 android:id="@+id/nav_about_us"
                 android:icon="@drawable/ic_forum"
                 android:title="@string/nav_about_us" />
-            <item
+            <!--<item
                 android:id="@+id/nav_settings"
                 android:icon="@drawable/ic_settings"
-                android:title="@string/nav_settings" />
+                android:title="@string/nav_settings" />-->
         </menu>
     </item>
 </menu>

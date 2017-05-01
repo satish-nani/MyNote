@@ -2,7 +2,6 @@
 <android.support.design.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_height="match_parent"
     android:layout_width="match_parent"
     android:id="@+id/coordinatorLayout"
@@ -36,7 +35,19 @@
         >
     </android.support.v7.widget.RecyclerView>
 
-
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/empty_note"
+        android:visibility="visible"
+        android:textSize="26sp"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:textColor="@color/iconColor"
+        android:id="@+id/emptyNote"
+       android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        />
 </RelativeLayout>
     <android.support.design.widget.FloatingActionButton
         android:layout_width="wrap_content"
@@ -47,5 +58,9 @@
         android:elevation="6dp"
         app:fabSize="normal"
         android:src="@drawable/plus"
+        android:background="?android:attr/selectableItemBackground"
+        android:clickable="true"
         />
+
+
 </android.support.design.widget.CoordinatorLayout>

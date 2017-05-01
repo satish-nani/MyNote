@@ -3,7 +3,6 @@
     android:id="@+id/drawer_layout"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
@@ -23,9 +22,11 @@
         android:fitsSystemWindows="true"
         app:headerLayout="@layout/nav_header_main"
         app:menu="@menu/drawer_menu"
-        app:itemIconTint="@color/iconColor"
-        app:itemTextAppearance="@style/menu_item"
+        app:itemIconTint="@color/menu_icon"
+        app:itemTextColor="@color/menu_item"
         >
 
     </android.support.design.widget.NavigationView>
 </android.support.v4.widget.DrawerLayout>
+
+    <!--app:itemTextAppearance="@style/menu_item"-->
